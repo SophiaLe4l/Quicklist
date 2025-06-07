@@ -3,7 +3,7 @@ const items = []
 function addItem() {
     const itemName = document.querySelector("#item").value
 
-    const item = {
+    let item = {
         name: itemName,
         checked: false
     }
@@ -38,6 +38,8 @@ function showItemsList() {
         </div>
         `
     })
+
+    localStorage.setItem("items", JSON.stringify(items))
 }
 
 function removeItem(itemName) {
@@ -66,3 +68,14 @@ function checkItem(itemName) {
     item.checked = !item.checked
     showItemsList()
 }
+
+function verifyLocaStorageItems() {
+    const localStorageItems = localStorage.getItem("items")
+
+    if (localStorageItems) {
+        items = JSON.parse(localStorageItems)
+        showItemsList()
+    }
+}
+
+verifyLocalStorageItems()
